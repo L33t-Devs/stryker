@@ -16,7 +16,7 @@ describe('runResultHelpers', () => {
     });
 
     it('should report a failed test as "killed"', () => {
-      const expected: MutantRunResult = { status: MutantRunStatus.Killed, failureMessage: 'expected foo to be bar', killedBy: '42' };
+      const expected: MutantRunResult = { status: MutantRunStatus.Killed, failureMessage: 'expected foo to be bar', killedBy: '42', nrOfTests: 3 };
       expect(
         toMutantRunResult({
           status: DryRunStatus.Complete,
@@ -30,7 +30,7 @@ describe('runResultHelpers', () => {
     });
 
     it('should report only succeeded tests as "survived"', () => {
-      const expected: MutantRunResult = { status: MutantRunStatus.Survived };
+      const expected: MutantRunResult = { status: MutantRunStatus.Survived, nrOfTests: 3 };
       expect(
         toMutantRunResult({
           status: DryRunStatus.Complete,
@@ -44,7 +44,7 @@ describe('runResultHelpers', () => {
     });
 
     it('should report an empty suite as "survived"', () => {
-      const expected: MutantRunResult = { status: MutantRunStatus.Survived };
+      const expected: MutantRunResult = { status: MutantRunStatus.Survived, nrOfTests: 0 };
       expect(
         toMutantRunResult({
           status: DryRunStatus.Complete,

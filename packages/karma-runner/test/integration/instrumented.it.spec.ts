@@ -119,11 +119,11 @@ describe(`${KarmaTestRunner.name} running on instrumented code`, () => {
         const result = await sut.mutantRun(factory.mutantRunOptions({ activeMutant: factory.mutant({ id: 2 }), testFilter: ['spec1'] }));
         assertions.expectKilled(result);
         result.failureMessage = result.failureMessage.split('\n')[0];
-        const expected: KilledMutantRunResult = {
+        const expected = factory.killedMutantRunResult({
           killedBy: 'spec1',
           status: MutantRunStatus.Killed,
           failureMessage: 'Error: Expected undefined to be 3.',
-        };
+        });
         expect(result).deep.eq(expected);
       });
 
@@ -237,6 +237,7 @@ describe(`${KarmaTestRunner.name} running on instrumented code`, () => {
           killedBy: 'Add should be able 1 to a number',
           status: MutantRunStatus.Killed,
           failureMessage: 'AssertionError: expected undefined to equal 3',
+          nrOfTests: 1,
         };
         expect(result).deep.eq(expected);
       });

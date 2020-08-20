@@ -14,10 +14,12 @@ export function toMutantRunResult(dryRunResult: DryRunResult): MutantRunResult {
           status: MutantRunStatus.Killed,
           failureMessage: killedBy.failureMessage,
           killedBy: killedBy.id,
+          nrOfTests: dryRunResult.tests.length,
         };
       } else {
         return {
           status: MutantRunStatus.Survived,
+          nrOfTests: dryRunResult.tests.length,
         };
       }
     }
